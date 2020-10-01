@@ -66,6 +66,11 @@ mkdir /mnt/home
 mount -t ext4 "${DISK}3" /mnt/home/
 mkdir /mnt/etc
 
+
+
+
+
+
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
@@ -73,6 +78,9 @@ echo "--------------------------------------"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 pacstrap -i /mnt base
 arch-chroot /mnt
+mkdir /mnt/boot/efi
+mount -t vfat "${DISK}1" /mnt/boot/
+
 pacman -S linux linux-headers
 pacman -S nano
 
@@ -83,6 +91,9 @@ echo "--------------------------------------"
 mkdir /mnt/boot/efi
 mount -t vfat "${DISK}1" /mnt/boot/
 bootctl --path=/ boot install
+
+pacman -S linux linux-headers
+pacman -S nano
 
 #cat <<EOF > /boot/loader/entries/arch.conf
 
