@@ -55,7 +55,12 @@ mkfs.ext4 -L "linuxfilesystem" "${DISK}3"
 
 mount -t ext4 "${DISK}2" /mnt
 mkdir /mnt/home
+
 mount -t ext4 "${DISK}3" /mnt/home/
 mkdir /mnt/etc
+
+mkdir /mnt/boot/efi
+mount  "${DISK}1" /mnt/boot/
+
 
 ./Arch_Installation.sh
