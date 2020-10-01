@@ -62,5 +62,5 @@ mkfs.ext4 -L "linuxfilesystem" "${DISK}2"
 
 mount -t ext4 "${DISK}2" /mnt
 mkdir /mnt/home
-mount -t vfat "${DISK}3" /mnt/home/
+mount -t ext4 "${DISK}3" /mnt/home/
 mkdir /mnt/etc
