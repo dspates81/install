@@ -53,14 +53,16 @@ mkfs.ext4 -L "linuxfilesystem" "${DISK}3"
 
 # mount target
 
+mkdir /mnt/boot/efi
+mount  "${DISK}1" /mnt/boot/EFI
+
 mount -t ext4 "${DISK}2" /mnt
 mkdir /mnt/home
 
 mount -t ext4 "${DISK}3" /mnt/home/
 mkdir /mnt/
 
-mkdir /mnt/boot/efi
-mount  "${DISK}1" /mnt/boot/EFI
+
 
 
 ./Arch_Installation.sh
