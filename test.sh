@@ -118,7 +118,7 @@ echo "--------------------------------------"
 echo "Enter password for root user: "
 passwd root
 
-exit
+
 umount -R /mnt
 
 echo "--------------------------------------"
