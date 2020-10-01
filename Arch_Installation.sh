@@ -7,13 +7,13 @@ echo "--------------------------------------"
 genfstab -U -p /mnt >> /mnt/etc/fstab
 pacstrap -i /mnt base
 arch-chroot /mnt
-pacman -S linux linux-headers
 pacman -S nano
 
 
 mkdir /mnt/boot/efi
 mount -t vfat "${DISK}1" /mnt/boot/
 bootctl --path=/ boot install
+pacman -S linux linux-headers
 
 
 echo "--------------------------------------"
