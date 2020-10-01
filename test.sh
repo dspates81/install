@@ -29,7 +29,7 @@ lsblk
 echo "Please enter disk: (example /dev/sda)"
 read DISK
 echo "--------------------------------------"
-echo -e "\nFormatting disk...\n$HR"
+echo " "\nFormatting disk...\n$HR"
 echo "--------------------------------------"
 
 # disk prep
@@ -108,7 +108,7 @@ echo "--------------------------------------"
 #EOF
 
 
-echo "--------------------------------------"
+echo "-------------------------------------"
 echo "--      Set Password for Root       --"
 echo "--------------------------------------"
 echo "Enter password for root user: "
