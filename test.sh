@@ -90,26 +90,26 @@ echo "--------------------------------------"
 
 mkdir /mnt/boot/efi
 mount -t vfat "${DISK}1" /mnt/boot/
-bootctl --path=/ boot install
 
 pacman -S linux linux-headers
 pacman -S nano
 
-#cat <<EOF > /boot/loader/entries/arch.conf
+cat <<EOF > /boot/loader/entries/arch.conf
 
-#title Arch Linux  
-#linux /vmlinuz-linux  
-#initrd  /initramfs-linux.img  
-#options root=${DISK}1 rw
-#EOF
+bootctl --path=/ boot install
+title Arch Linux  
+linux /vmlinuz-linux  
+initrd  /initramfs-linux.img  
+options root=${DISK}1 rw
+EOF
 
-#echo "--------------------------------------"
-#echo "--          Network Setup           --"
-#echo "--------------------------------------"
-#pacman -S networkmanager wpa_supplicant wireless_tools netctl dialog dhclient --noconfirm --needed
-#systemctl enable --now NetworkManager
-#pacman -S base-devel openssh
-#systemctl enable ssh
+echo "--------------------------------------"
+echo "--          Network Setup           --"
+echo "--------------------------------------"
+pacman -S networkmanager wpa_supplicant wireless_tools netctl dialog dhclient --noconfirm --needed
+systemctl enable --now NetworkManager
+pacman -S base-devel openssh
+systemctl enable ssh
 
 
 echo "--------------------------------------"
