@@ -11,8 +11,7 @@ pacman -S nano
 
 
 mkdir /mnt/boot/efi
-mount -t vfat "${DISK}1" /mnt/boot/
-#bootctl --path=/ boot install
+mount "${DISK}1" /mnt/boot/
 pacman -S linux linux-headers
 
 
@@ -30,18 +29,6 @@ echo "--      Set Password for Root       --"
 echo "--------------------------------------"
 echo "Enter password for root user: "
 passwd root
-
-echo "--------------------------------------"
-echo "-- Bootloader Systemd Installation  --"
-echo "--------------------------------------"
-
-#cat <<EOF > /boot/loader/entries/arch.conf
-
-#title Arch Linux  
-#linux /vmlinuz-linux  
-#initrd  /initramfs-linux.img  
-#options root=${DISK}1 rw
-#EOF
 
 umount -R /mnt
 
