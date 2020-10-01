@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-
-
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
@@ -12,21 +10,11 @@ arch-chroot /mnt
 pacman -S linux linux-headers
 pacman -S nano
 
-echo "--------------------------------------"
-echo "-- Bootloader Systemd Installation  --"
-echo "--------------------------------------"
 
 mkdir /mnt/boot/efi
 mount -t vfat "${DISK}1" /mnt/boot/
 bootctl --path=/ boot install
 
-cat <<EOF > /boot/loader/entries/arch.conf
-
-title Arch Linux  
-linux /vmlinuz-linux  
-initrd  /initramfs-linux.img  
-options root=${DISK}1 rw
-EOF
 
 echo "--------------------------------------"
 echo "--          Network Setup           --"
@@ -43,7 +31,18 @@ echo "--------------------------------------"
 echo "Enter password for root user: "
 passwd root
 
-exit
+echo "--------------------------------------"
+echo "-- Bootloader Systemd Installation  --"
+echo "--------------------------------------"
+
+cat <<EOF > /boot/loader/entries/arch.conf
+
+title Arch Linux  
+linux /vmlinuz-linux  
+initrd  /initramfs-linux.img  
+options root=${DISK}1 rw
+EOF
+
 umount -R /mnt
 
 echo "--------------------------------------"
