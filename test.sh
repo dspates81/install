@@ -75,11 +75,11 @@ echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
 
-genfstab -U -p /mnt >> /mnt/etc/fstab
-pacstrap -i /mnt base
 arch-chroot /mnt
 mkdir /mnt/boot/efi
 mount -t vfat "${DISK}1" /mnt/boot/
+genfstab -U -p /mnt >> /mnt/etc/fstab
+pacstrap -i /mnt base
 
 pacman -S linux linux-headers
 pacman -S nano
@@ -88,28 +88,22 @@ echo "--------------------------------------"
 echo "-- Bootloader Systemd Installation  --"
 echo "--------------------------------------"
 
-mkdir /mnt/boot/efi
-mount -t vfat "${DISK}1" /mnt/boot/
+#cat <<EOF > /boot/loader/entries/arch.conf
 
-pacman -S linux linux-headers
-pacman -S nano
+#bootctl --path=/ boot install
+#title Arch Linux  
+#linux /vmlinuz-linux  
+#initrd  /initramfs-linux.img  
+#options root=${DISK}1 rw
+#EOF
 
-cat <<EOF > /boot/loader/entries/arch.conf
-
-bootctl --path=/ boot install
-title Arch Linux  
-linux /vmlinuz-linux  
-initrd  /initramfs-linux.img  
-options root=${DISK}1 rw
-EOF
-
-echo "--------------------------------------"
-echo "--          Network Setup           --"
-echo "--------------------------------------"
-pacman -S networkmanager wpa_supplicant wireless_tools netctl dialog dhclient --noconfirm --needed
-systemctl enable --now NetworkManager
-pacman -S base-devel openssh
-systemctl enable ssh
+#echo "--------------------------------------"
+#echo "--          Network Setup           --"
+#echo "--------------------------------------"
+#pacman -S networkmanager wpa_supplicant wireless_tools netctl dialog dhclient --noconfirm --needed
+#systemctl enable --now NetworkManager
+#pacman -S base-devel openssh
+#systemctl enable ssh
 
 
 echo "--------------------------------------"
