@@ -57,10 +57,10 @@ mount -t ext4 "${DISK}2" /mnt
 mkdir /mnt/home
 
 mount -t ext4 "${DISK}3" /mnt/home/
-mkdir /mnt/etc
+mkdir /mnt/
 
 mkdir /mnt/boot/efi
-mount  "${DISK}1" /mnt/boot/
+mount  "${DISK}1" /mnt/boot/EFI
 
 
 ./Arch_Installation.sh
