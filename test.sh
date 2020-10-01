@@ -76,13 +76,23 @@ echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
 
 arch-chroot /mnt
-mkdir /mnt/boot/efi
-mount -t vfat "${DISK}1" /mnt/boot/
+mkdir -p /boot/efi
+mount -t vfat "${DISK}1" /boot/EFI
 genfstab -U -p /mnt >> /mnt/etc/fstab
 pacstrap -i /mnt base
-
 pacman -S linux linux-headers
+mkinitcpio -p linux
 pacman -S nano
+
+
+echo "--------------------------------------"
+echo "--          Network Setup           --"
+echo "--------------------------------------"
+pacman -S networkmanager wpa_supplicant wireless_tools netctl dhclient 
+systemctl enable --now NetworkManager
+pacman -S dialog
+pacman -S base-devel openssh
+systemctl enable ssh
 
 echo "--------------------------------------"
 echo "-- Bootloader Systemd Installation  --"
@@ -96,14 +106,6 @@ echo "--------------------------------------"
 #initrd  /initramfs-linux.img  
 #options root=${DISK}1 rw
 #EOF
-
-#echo "--------------------------------------"
-#echo "--          Network Setup           --"
-#echo "--------------------------------------"
-#pacman -S networkmanager wpa_supplicant wireless_tools netctl dialog dhclient --noconfirm --needed
-#systemctl enable --now NetworkManager
-#pacman -S base-devel openssh
-#systemctl enable ssh
 
 
 echo "--------------------------------------"
