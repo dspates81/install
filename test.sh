@@ -56,7 +56,7 @@ echo -e "\nCreating Filesystems...\n$HR"
 
 mkfs.vfat -F32 -n "UEFISYS" "${DISK}1"
 mkfs.ext4 -L "ROOT" "${DISK}2"
-mkfs.ext4 -L "linuxfilesystem" "${DISK}2"
+mkfs.ext4 -L "linuxfilesystem" "${DISK}3"
 
 # mount target
 
