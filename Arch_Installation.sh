@@ -8,11 +8,8 @@ genfstab -U -p /mnt >> /mnt/etc/fstab
 pacstrap -i /mnt base
 arch-chroot /mnt
 pacman -S nano
-
-
-mkdir /mnt/boot/efi
-mount "${DISK}1" /mnt/boot/
 pacman -S linux linux-headers
+mkinitcpio -p linux
 
 
 echo "--------------------------------------"
