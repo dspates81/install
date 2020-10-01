@@ -98,14 +98,14 @@ echo "--------------------------------------"
 echo "-- Bootloader Systemd Installation  --"
 echo "--------------------------------------"
 
-cat <<EOF > /boot/loader/entries/arch.conf
+vim /boot/loader/entries/arch.conf
 
 bootctl --path=/ boot install
 title Arch Linux  
 linux /vmlinuz-linux  
 initrd  /initramfs-linux.img  
 options root=${DISK}1 rw
-EOF
+
 
 
 echo "-------------------------------------"
