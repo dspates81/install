@@ -86,35 +86,35 @@ pacman -S nano
 
 
 echo "--------------------------------------"
-echo "--          Network Setup           --"
-echo "--------------------------------------"
-pacman -S networkmanager wpa_supplicant wireless_tools netctl dhclient 
-systemctl enable --now NetworkManager
-pacman -S dialog
-pacman -S base-devel openssh
-systemctl enable ssh
-
-echo "--------------------------------------"
 echo "-- Bootloader Systemd Installation  --"
 echo "--------------------------------------"
 
-vim /boot/loader/entries/arch.conf
-
 bootctl --path=/ boot install
+
+cat <<EOF > /boot/loader/entries/arch.conf
+
 title Arch Linux  
 linux /vmlinuz-linux  
 initrd  /initramfs-linux.img  
 options root=${DISK}1 rw
+EOF
+
+echo "--------------------------------------"
+echo "--          Network Setup           --"
+echo "--------------------------------------"
+pacman -S networkmanager wpa_supplicant wireless_tools netctl dialog dhclient --noconfirm --needed
+systemctl enable --now NetworkManager
+pacman -S base-devel openssh
+systemctl enable ssh
 
 
-
-echo "-------------------------------------"
+echo "--------------------------------------"
 echo "--      Set Password for Root       --"
 echo "--------------------------------------"
 echo "Enter password for root user: "
 passwd root
 
-
+exit
 umount -R /mnt
 
 echo "--------------------------------------"
