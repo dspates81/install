@@ -56,8 +56,8 @@ mkfs.ext4 -L "ROOT" "${DISK}2"
 
 mkdir /mnt
 mount -t ext4 "${DISK}2" /mnt/
-#mkdir /mnt/boot
-#mount "${DISK}1" /mnt/boot/
+mkdir /mnt/boot
+mount "${DISK}1" /mnt/boot/
 
 #Install Arch linux base pacgkages
 echo "--------------------------------------"
