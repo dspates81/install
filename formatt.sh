@@ -53,8 +53,6 @@ mkfs.ext4 -L "linuxfilesystem" "${DISK}3"
 
 # mount target
 
-mkdir /mnt/boot/efi
-mount  "${DISK}1" /mnt/boot/EFI
 
 mount -t ext4 "${DISK}2" /mnt
 mkdir /mnt/home
