@@ -68,7 +68,8 @@ echo "--------------------------------------"
 arch-chroot /mnt
 genfstab -U /mnt >> /mnt/etc/fstab
 pacstrap -i /mnt base
-pacman -S linux-firmware
+pacman -S linux
+pacman -S linux-headers
 pacman -S base-devel
 
 pacman -S efibootmgr
