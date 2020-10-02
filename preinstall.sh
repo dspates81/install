@@ -53,28 +53,35 @@ mkfs.vfat -F32 -n "UEFISYS" "${DISK}1"
 mkfs.ext4 -L "ROOT" "${DISK}2"
 
 # mount target
-mkdir /mnt
-mount -t ext4 "${DISK}2" /mnt
+
+mount -t ext4 "${DISK}2" /mnt/
 mkdir /mnt/boot
+mount "${DISK}1" /mnt/boot/
 
 #Install Arch linux base pacgkages
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
-mkdir /mnt/boot/efi
-mount "${DISK}1" /mnt/boot/efi
-pacstrap /mnt base base-devel linux linux-firmware 
+
+pacstrap /mnt base 
+pacman -S base-devel linux-firmware 
 pacman -S vim nano sudo 
-genfstab -U -p/mnt >> /mnt/etc/fstab
-pacstrap -i /mnt base
+genfstab -U /mnt >> /mnt/etc/fstab
+#pacstrap -i /mnt base
 arch-chroot /mnt
+fallocate -l 2GB /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+ln -sf /usr/share/zoneinfo/America/New York /etc/localtime
+hwclock --systohc
 
 
-echo "--------------------------------------"
-echo "--          Network Setup           --"
-echo "--------------------------------------"
-pacman -S networkmanager 
-pacman -S wpa_supplicant wireless_tools netctl dialog dhclient --noconfirm --needed
+pacman -S os-prober mtools do sfstools
+pacman -S efibootmgr
+
+pacman -S networkmanager network-manager-applet 
+pacman -S wpa_supplicant wireless_tools netctl dialog dhclient
 systemctl enable now NetworkManager
 pacman -S nano
 systemctl enable ssh
@@ -95,16 +102,11 @@ echo "--------------------------------------"
 echo "-- Bootloader Systemd Installation  --"
 echo "--------------------------------------"
 
-mkdir /mnt/boot/loader/entries/arch.conf
 
-bootctl install
 
-cat <<EOF > /boot/loader/entries/arch.conf
-title Arch Linux  
-linux /vmlinuz-linux  
-initrd  /initramfs-linux.img  
-options root="${DISK}1" rw
-EOF
+bootctl --path=/boot install
+
+
 
 echo "--------------------------------------"
 echo "--   SYSTEM READY FOR FIRST BOOT    --"
