@@ -15,8 +15,8 @@ mkinitcpio -p linux
 echo "--------------------------------------"
 echo "--          Network Setup           --"
 echo "--------------------------------------"
-pacman -S networkmanager wpa_supplicant wireless_tools netctl dialog dhclient --noconfirm --needed
-systemctl enable --now NetworkManager
+pacman -S networkmanager wpa_supplicant wireless_tools netctl dialog dhclient
+systemctl enable now NetworkManager
 pacman -S base-devel openssh
 systemctl enable ssh
 
