@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 echo "-------------------------------------------------"
@@ -53,14 +52,10 @@ mkfs.ext4 -L "linuxfilesystem" "${DISK}3"
 
 # mount target
 
-
 mount -t ext4 "${DISK}2" /mnt
 mkdir /mnt/home
-
 mount -t ext4 "${DISK}3" /mnt/home/
-mkdir /mnt/
+mkdir /mnt/etc
 
 
-
-
-./Arch_Installation.sh
+#./Arch_Installation.sh
