@@ -64,14 +64,25 @@ echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
 
  
- 
-pacman -S vim nano sudo 
-genfstab -U /mnt >> /mnt/etc/fstab
-
 arch-chroot /mnt
-pacman -S base-devel linux-firmware
-bootctl --path=/boot install
+genfstab -U /mnt >> /mnt/etc/fstab
 pacstrap -i /mnt base
+pacman -S linux-firmware
+pacman -S base-devel
+
+pacman -S efibootmgr
+pacman -S os-prober mtools do sfstools
+pacman -S vim nano sudo 
+
+
+pacman -S networkmanager 
+pacman -S network-manager-applet 
+pacman -S wpa_supplicant wireless_tools
+pacman -S netctl dialog dhclient
+systemctl enable now NetworkManager
+pacman -S nano
+systemctl enable ssh
+
 
 echo "--------------------------------------"
 echo "--      Set Password for Root       --"
