@@ -32,7 +32,7 @@ echo "--------------------------------------"
 
 # disk prep
 sgdisk -Z ${DISK} # zap all on disk
-sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
+#sgdisk -a ${DISK} # new gpt disk 2048 alignment
 
 # create partitions
 sgdisk -n 1:0:+20480M ${DISK} # partition 1 (UEFI SYS), default start block, 20480MB
