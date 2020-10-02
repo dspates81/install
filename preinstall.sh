@@ -55,16 +55,16 @@ mkfs.ext4 -L "ROOT" "${DISK}2"
 # mount target
 
 mkdir /mnt
-mount -t ext4 "${DISK}2" /mnt/
+mount -t ext4 "${DISK}2" /mnt
 mkdir /mnt/boot
-mount "${DISK}1" /mnt/boot/
+
 
 #Install Arch linux base pacgkages
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
 
- 
+mkdir /mnt/boot/efi 
 arch-chroot /mnt
 genfstab -U /mnt >> /mnt/etc/fstab
 pacstrap -i /mnt base
