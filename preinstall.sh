@@ -58,36 +58,24 @@ mount -t ext4 "${DISK}2" /mnt
 mkdir /mnt/boot
 
 #Install Arch linux base pacgkages
-pacstrap -i /mnt base
-
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
-pacstrap /mnt base base-devel linux linux-headers vim nano sudo --noconfirm --needed
+mkdir /mnt/boot/efi
+mount "${DISK}1" /mnt/boot/efi
+pacstrap /mnt base base-devel linux linux-firmware 
+pacman -S vim nano sudo 
 genfstab -U -p/mnt >> /mnt/etc/fstab
+pacstrap -i /mnt base
 arch-chroot /mnt
 
-echo "--------------------------------------"
-echo "-- Bootloader Systemd Installation  --"
-echo "--------------------------------------"
-
-mkdir /mnt/boot/efi
-mount -t vfat "${DISK}1" /mnt/boot/efi
-
-bootctl install
-
-cat <<EOF > /boot/loader/entries/arch.conf
-title Arch Linux  
-linux /vmlinuz-linux  
-initrd  /initramfs-linux.img  
-options root=${DISK}1 rw
-EOF
 
 echo "--------------------------------------"
 echo "--          Network Setup           --"
 echo "--------------------------------------"
-pacman -S networkmanager wpa_supplicant wireless_tools netctl dialog dhclient --noconfirm --needed
-systemctl enable --now NetworkManager
+pacman -S networkmanager 
+pacman -S wpa_supplicant wireless_tools netctl dialog dhclient --noconfirm --needed
+systemctl enable now NetworkManager
 pacman -S nano
 systemctl enable ssh
 
@@ -103,8 +91,20 @@ echo "--------------------------------------"
 echo "Enter password for root user: "
 passwd root
 
-exit
-umount -R /mnt
+echo "--------------------------------------"
+echo "-- Bootloader Systemd Installation  --"
+echo "--------------------------------------"
+
+mkdir /mnt/boot/loader/entries/arch.conf
+
+bootctl install
+
+cat <<EOF > /boot/loader/entries/arch.conf
+title Arch Linux  
+linux /vmlinuz-linux  
+initrd  /initramfs-linux.img  
+options root="${DISK}1" rw
+EOF
 
 echo "--------------------------------------"
 echo "--   SYSTEM READY FOR FIRST BOOT    --"
