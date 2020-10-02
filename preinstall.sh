@@ -35,7 +35,7 @@ sgdisk -Z ${DISK} # zap all on disk
 sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
 
 # create partitions
-sgdisk -n 1:0:+5120M ${DISK} # partition 1 (UEFI SYS), default start block, 512MB
+sgdisk -n 1:0:+20480M ${DISK} # partition 1 (UEFI SYS), default start block, 20480MB
 sgdisk -n 2:0:0     ${DISK} # partition 2 (Root), default start, remaining
 
 # set partition types
@@ -54,9 +54,10 @@ mkfs.ext4 -L "ROOT" "${DISK}2"
 
 # mount target
 
+mkdir /mnt
 mount -t ext4 "${DISK}2" /mnt/
-mkdir /mnt/boot
-mount "${DISK}1" /mnt/boot/
+#mkdir /mnt/boot
+#mount "${DISK}1" /mnt/boot/
 
 #Install Arch linux base pacgkages
 echo "--------------------------------------"
