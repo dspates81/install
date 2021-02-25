@@ -15,15 +15,16 @@ if ! source install.conf; then
 
 	read -sp "Please enter password:" password
 
-	read -sp "Please repeat password:" password2
+	read -sp "Please repeat password:" password
 
 	# Check both passwords match
-	if [ "$password" != "$password2" ]; then
+	if [ "$password" != "$password" ]; then
 	    echo "Passwords do not match"
 	    exit 1
 	fi
   printf "hostname="$hostname"\n" >> "install.conf"
   printf "username="$username"\n" >> "install.conf"
+  printf "password="$password"\n" >> "install.conf"
   printf "password="$password"\n" >> "install.conf"
 fi
 
@@ -59,3 +60,6 @@ hostnamectl --no-ask-password set-hostname $hostname
 
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+
+
+./formatt.sh
