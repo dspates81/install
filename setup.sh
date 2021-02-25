@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 #-------------------------------------------------------------------------
 #      _          _    __  __      _   _
@@ -15,31 +14,18 @@ if ! source install.conf; then
 
 	read -sp "Please enter password:" password
 
-	read -sp "Please repeat password:" password
+	read -sp "Please repeat password:" password2
 
 	# Check both passwords match
-	if [ "$password" != "$password" ]; then
+	if [ "$password" != "$password2" ]; then
 	    echo "Passwords do not match"
 	    exit 1
 	fi
   printf "hostname="$hostname"\n" >> "install.conf"
   printf "username="$username"\n" >> "install.conf"
   printf "password="$password"\n" >> "install.conf"
-  printf "password="$password"\n" >> "install.conf"
 fi
 
-echo "-------------------------------------------------"
-echo "Setting up mirrors for optimal download - US Only"
-echo "-------------------------------------------------"
-pacman -S --noconfirm pacman-contrib curl
-
-nc=$(grep -c ^processor /proc/cpuinfo)
-echo "You have " $nc" cores."
-echo "-------------------------------------------------"
-echo "Changing the makeflags for "$nc" cores."
-sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j$nc"/g' /etc/makepkg.conf
-echo "Changing the compression settings for "$nc" cores."
-sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T $nc -z -)/g' /etc/makepkg.conf
 
 echo "-------------------------------------------------"
 echo "       Setup Language to US and set locale       "
@@ -58,8 +44,3 @@ hostnamectl --no-ask-password set-hostname $hostname
 
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
-
-echo "-------------------------------------------------"
-echo "      		Formatt                        "
-echo "-------------------------------------------------"
-./formatt.sh
