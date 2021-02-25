@@ -9,9 +9,20 @@ pacstrap -i /mnt base
 arch-chroot /mnt
 mkdir /mnt/boot/efi
 mount  "${DISK}1" /mnt/boot/EFI
-pacman -S nano
-pacman -S linux linux-headers
+mount  "${DISK}1" /mnt
+pacman -S linux linux-headers nano sudo man 
 mkinitcpio -p linux
+
+
+
+dd if=/dev/zero of=swapfile bs=1M count=5120 status=progress
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+
+echo "
+/swapfile		none	swap	defaults	0 0
+" >> /etc/fstab
 
 pacman -S grub efibootmgr dosfstools os-prober mtools
 grub-install --target=x86_64-efi --bootloader-id=grub_uefi --recheck
@@ -22,9 +33,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo "--------------------------------------"
 echo "--          Network Setup           --"
 echo "--------------------------------------"
-pacman -S networkmanager wpa_supplicant wireless_tools netctl dialog dhclient 
+pacman -S networkmanager wpa_supplicant wireless_tools netctl dialog dhclient base-devel openssh
 systemctl enable NetworkManager
-pacman -S base-devel openssh
 systemctl enable ssh
 
 
