@@ -58,4 +58,4 @@ mount -t ext4 "${DISK}3" /mnt/home/
 mkdir /mnt/etc
 
 
-#./Arch_Installation.sh
+./Arch_Installation.sh
