@@ -66,7 +66,7 @@ mkfs.ext4 -L "ROOT" "${DISK}2"
 
 # mount target
 
-mount -t ext4 "${DISK}2" /mnt
+mount /dev/"${DISK}2" /mnt
 mkdir -p /dev/"${DISK}1" /mnt/boot/efi
 mount /dev/"${DISK}1" /mnt/boot/efi
 
@@ -76,10 +76,9 @@ echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
 
 
-pacstrap -i /mnt base linux linux-headers nano sudo man 
+pacstrap -i /mnt base linux linux-firmware nano sudo man 
 genfstab -U -p /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
-
 
 
 
@@ -101,7 +100,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo "--------------------------------------"
 echo "--          Network Setup           --"
 echo "--------------------------------------"
-pacman -S networkmanager network-manager-applet wpa_supplicant wireless_tools mtools netctl dialog dhclient multilib-devel base-devel openssh
+
+pacman -S networkmanager network-manager-applet wpa_supplicant wireless_tools mtools netctl dialog dhclient multilib-devel base-devel openssh linux-headers 
 systemctl enable NetworkManager
 systemctl enable ssh
 
