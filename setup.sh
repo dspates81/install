@@ -17,23 +17,14 @@ echo "-------------------------------------------------"
 
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 echo hwclock --systohc
-cp locale.gen /etc/locale.gen
+nano /etc/locale.gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-echo locale-gen
-
-# Set keymaps
-localectl --no-ask-password set-keymap us
-
-# Hostname
-hostnamectl --no-ask-password set-hostname $hostname
+locale-gen
 
 
 echo "-------------------------------------------------"
 echo "-------------------Formatt----------------------"
 echo "-------------------------------------------------"
-timedatectl set-ntp true
-pacman -S --noconfirm pacman-contrib
-
 
 
 echo -e "\nInstalling prereqs...\n$HR"
@@ -78,7 +69,7 @@ mkfs.ext4 -L "ROOT" "${DISK}2"
 
 mount -t ext4 "${DISK}2" /mnt
 mkdir -p /dev/"${DISK}1" /mnt/boot/efi
-
+mount /dev/"${DISK}1" /mnt/boot/efi
 
 
 echo "--------------------------------------"
@@ -86,12 +77,11 @@ echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
 
 
+pacstrap -i /mnt base linux linux-headers nano sudo man 
 genfstab -U -p /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
-mkdir -p /mnt/boot/efi
-mount  "${DISK}1" /mnt/boot/EFI
-mount  "${DISK}2" /mnt
-pacstrap -i /mnt base linux linux-headers nano sudo man 
+
+
 
 
 dd if=/dev/zero of=swapfile bs=1M count=5120 status=progress
@@ -143,8 +133,10 @@ fi
 echo "Enter password for root user: "
 passwd root
 
+
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+
 
 
 umount -R /mnt
