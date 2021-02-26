@@ -128,15 +128,6 @@ fi
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 
-echo "
-/swapfile		none	swap	defaults	0 0
-" >> /etc/fstab
-
-dd if=/dev/zero of=swapfile bs=1M count=2048 status=progress
-chmod 600 /swapfile
-printf mkswap /swapfile
-printf swapon /swapfile
-
 
 
 umount -R /mnt
