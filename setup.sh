@@ -10,16 +10,6 @@
 
 
 
-echo "-------------------------------------------------"
-echo "       Setup Language to US and set locale       "
-echo "-------------------------------------------------"
-
-
-ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
-echo hwclock --systohc
-nano /etc/locale.gen
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
-locale-gen
 
 
 echo "-------------------------------------------------"
@@ -81,20 +71,41 @@ genfstab -U -p /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 
 
+echo "-------------------------------------------------"
+echo "       Setup Language to US and set locale       "
+echo "-------------------------------------------------"
+
+
+ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+echo hwclock --systohc
+nano /etc/locale.gen
+echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+locale-gen
+
+
+
+dd if=/dev/zero of=swapfile bs=1M count=5120 status=progress
+chmod 600 /swapfile
+printf mkswap /swapfile
+printf swapon /swapfile
+
+echo "
+/swapfile		none	swap	defaults	0 0
+" >> /etc/fstab
+
 
 
 echo "--------------------------------------"
 echo "--          Network Setup           --"
 echo "--------------------------------------"
 
-pacman -S --needed grub efibootmgr dosfstools os-prober mtools networkmanager network-manager-applet wpa_supplicant wireless_tools mtools netctl dialog dhclient multilib-devel base-devel openssh linux-headers 
+pacman -S --needed grub efibootmgr dosfstools os-prober mtools networkmanager network-manager-applet wpa_supplicant wireless_tools netctl dialog dhclient multilib-devel base-devel openssh linux-headers 
+
 systemctl enable NetworkManager
 systemctl enable ssh
 
-
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
-
 
 echo "--------------------------------------"
 echo "--      Set Password for User       --"
