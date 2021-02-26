@@ -7,24 +7,7 @@
 #  Arch Linux Post Install Setup and Config
 #-------------------------------------------------------------------------
 
-if ! source install.conf; then
-	read -p "Please enter hostname:" hostname
 
-	read -p "Please enter username:" username
-
-	read -sp "Please enter password:" password
-
-	read -sp "Please repeat password:" password2
-
-	# Check both passwords match
-	if [ "$password" != "$password2" ]; then
-	    echo "Passwords do not match"
-	    exit 1
-	fi
-  printf "hostname="$hostname"\n" >> "install.conf"
-  printf "username="$username"\n" >> "install.conf"
-  printf "password="$password"\n" >> "install.conf"
-fi
 
 
 echo "-------------------------------------------------"
@@ -32,9 +15,9 @@ echo "       Setup Language to US and set locale       "
 echo "-------------------------------------------------"
 
 
-cp localtime  /etc/localtime
+ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 echo hwclock --systohc
-cp locale.gen > /etc/locale.gen
+cp locale.gen /etc/locale.gen
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo locale-gen
 
@@ -44,16 +27,13 @@ localectl --no-ask-password set-keymap us
 # Hostname
 hostnamectl --no-ask-password set-hostname $hostname
 
-# Add sudo no password rights
-sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
-
-
 
 echo "-------------------------------------------------"
 echo "-------------------Formatt----------------------"
 echo "-------------------------------------------------"
 timedatectl set-ntp true
 pacman -S --noconfirm pacman-contrib
+
 
 
 echo -e "\nInstalling prereqs...\n$HR"
@@ -63,7 +43,6 @@ echo "-------------------------------------------------"
 echo "-------select your disk to format----------------"
 echo "-------------------------------------------------"
 lsblk
-
 echo "Please enter disk: (example /dev/sda)"
 read DISK
 echo "--------------------------------------"
@@ -108,14 +87,17 @@ echo "--------------------------------------"
 
 
 genfstab -U -p /mnt >> /mnt/etc/fstab
-pacstrap -i /mnt base linux linux-headers nano sudo man 
 arch-chroot /mnt
+mkdir -p /mnt/boot/efi
+mount  "${DISK}1" /mnt/boot/EFI
+mount  "${DISK}2" /mnt
+pacstrap -i /mnt base linux linux-headers nano sudo man 
 
 
 dd if=/dev/zero of=swapfile bs=1M count=5120 status=progress
 chmod 600 /swapfile
-echo mkswap /swapfile
-echo swapon /swapfile
+mkswap /swapfile
+swapon /swapfile
 
 echo "
 /swapfile		none	swap	defaults	0 0
@@ -124,6 +106,7 @@ echo "
 pacman -S grub efibootmgr dosfstools os-prober mtools
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
+
 
 
 echo "--------------------------------------"
@@ -135,10 +118,34 @@ systemctl enable ssh
 
 
 echo "--------------------------------------"
-echo "--      Set Password for Root       --"
+echo "--      Set Password for User       --"
 echo "--------------------------------------"
+
+if ! source install.conf; then
+	read -p "Please enter hostname:" hostname
+
+	read -p "Please enter username:" username
+
+	read -sp "Please enter password:" password
+
+	read -sp "Please repeat password:" password2
+
+	# Check both passwords match
+	if [ "$password" != "$password2" ]; then
+	    echo "Passwords do not match"
+	    exit 1
+	fi
+  printf "hostname="$hostname"\n" >> "install.conf"
+  printf "username="$username"\n" >> "install.conf"
+  printf "password="$password"\n" >> "install.conf"
+fi
+
 echo "Enter password for root user: "
 passwd root
+
+# Add sudo no password rights
+sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+
 
 umount -R /mnt
 
