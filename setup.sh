@@ -33,7 +33,7 @@ echo "-------------------------------------------------"
 
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
-nano /etc/locale.gen
+cp locale.gen > /etc/locale.gen
 echo "LANG=en_UTF-8" > etc/locale.conf
 local-gen
 
