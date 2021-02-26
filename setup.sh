@@ -45,3 +45,4 @@ hostnamectl --no-ask-password set-hostname $hostname
 
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
+./formatt.sh
