@@ -84,8 +84,8 @@ arch-chroot /mnt
 
 dd if=/dev/zero of=swapfile bs=1M count=5120 status=progress
 chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
+printf mkswap /swapfile
+printf swapon /swapfile
 
 echo "
 /swapfile		none	swap	defaults	0 0
@@ -133,7 +133,6 @@ if ! source install.conf; then
   printf "password="$password"\n" >> "install.conf"
   printf "root="$root"\n" >> "install.conf"
 fi
-
 
 
 # Add sudo no password rights
