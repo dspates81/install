@@ -66,9 +66,9 @@ mkfs.ext4 -L "ROOT" "${DISK}2"
 
 # mount target
 
-mount /dev/"${DISK}2" /mnt
+mount  -t ext4 "${DISK}2" /mnt
 mkdir -p /dev/"${DISK}1" /mnt/boot/efi
-mount /dev/"${DISK}1" /mnt/boot/efi
+mount  "${DISK}1" /mnt/boot/efi
 
 
 echo "--------------------------------------"
@@ -118,6 +118,10 @@ if ! source install.conf; then
 	read -sp "Please enter password:" password
 
 	read -sp "Please repeat password:" password2
+	
+	read -sp "Please enter username:" root
+	
+	read -sp "Please enter username:" root
 
 	# Check both passwords match
 	if [ "$password" != "$password2" ]; then
@@ -127,10 +131,9 @@ if ! source install.conf; then
   printf "hostname="$hostname"\n" >> "install.conf"
   printf "username="$username"\n" >> "install.conf"
   printf "password="$password"\n" >> "install.conf"
+  printf "root="$root"\n" >> "install.conf"
 fi
 
-echo "Enter password for root user: "
-passwd root
 
 
 # Add sudo no password rights
