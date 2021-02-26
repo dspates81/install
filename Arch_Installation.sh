@@ -6,15 +6,8 @@ echo "--------------------------------------"
 
 
 genfstab -U -p /mnt >> /mnt/etc/fstab
-pacstrap -i /mnt base
-arch-chroot /mnt
-mkdir -p /mnt/boot/efi
-mount  "${DISK}1" /mnt/boot/EFI
-mount  "${DISK}2" /mnt
-pacman -S linux linux-headers nano sudo man 
-mkinitcpio -p linux
-
-
+pacstrap -i /mnt base linux linux-headers nano sudo man
+arch-chroot /mnt  
 
 dd if=/dev/zero of=swapfile bs=1M count=5120 status=progress
 chmod 600 /swapfile
