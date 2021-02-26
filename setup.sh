@@ -31,10 +31,10 @@ echo "-------------------------------------------------"
 echo "       Setup Language to US and set locale       "
 echo "-------------------------------------------------"
 
-ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+cp localtime > /etc/localtime
 hwclock --systohc
 cp locale.gen > /etc/locale.gen
-echo "LANG=en_UTF-8" > etc/locale.conf
+cp locale.conf > etc/locale.conf
 local-gen
 
 # Set keymaps
