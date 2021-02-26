@@ -82,7 +82,7 @@ arch-chroot /mnt
 
 
 
-dd if=/dev/zero of=swapfile bs=1M count=5120 status=progress
+dd if=/dev/zero of=swapfile bs=1M count=2048 status=progress
 chmod 600 /swapfile
 printf mkswap /swapfile
 printf swapon /swapfile
@@ -91,19 +91,19 @@ echo "
 /swapfile		none	swap	defaults	0 0
 " >> /etc/fstab
 
-pacman -S grub efibootmgr dosfstools os-prober mtools
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --recheck
-grub-mkconfig -o /boot/grub/grub.cfg
-
 
 
 echo "--------------------------------------"
 echo "--          Network Setup           --"
 echo "--------------------------------------"
 
-pacman -S networkmanager network-manager-applet wpa_supplicant wireless_tools mtools netctl dialog dhclient multilib-devel base-devel openssh linux-headers 
+pacman -S --needed grub efibootmgr dosfstools os-prober mtools networkmanager network-manager-applet wpa_supplicant wireless_tools mtools netctl dialog dhclient multilib-devel base-devel openssh linux-headers 
 systemctl enable NetworkManager
 systemctl enable ssh
+
+
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --recheck
+grub-mkconfig -o /boot/grub/grub.cfg
 
 
 echo "--------------------------------------"
