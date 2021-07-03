@@ -24,7 +24,7 @@ echo "Dspates81" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 Dspates81.localdomain Dspates81" >> /etc/hosts
-echo root:password | Pain@4581
+echo root:password | chpasswd
 
 # You can add xorg to the installation packages, I usually add it at the DE or WM install script
 # You can remove the tlp package if you are installing on a desktop or vm
