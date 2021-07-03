@@ -19,7 +19,6 @@ ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
 sed -i '177s/.//' /etc/locale.gen
 locale-gen
-echo "LANG=en_US.UTF-8" >> /etc/locale.conf
 echo "KEYMAP=us" >> /etc/vconsole.conf
 echo "Dspates81" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
