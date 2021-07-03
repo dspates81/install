@@ -1,15 +1,11 @@
-!/usr/bin/env bash
+!#/bin/bash
 
 echo "--------------------------------------"
 echo "-- Arch Install on Main Drive       --"
 echo "--------------------------------------"
 
 
-genfstab -U -p /mnt >> /mnt/etc/fstab
-pacstrap -i /mnt base linux linux-headers nano sudo man
-arch-chroot /mnt  
-
-dd if=/dev/zero of=swapfile bs=1M count=5120 status=progress
+dd if=/dev/zero of=swapfile bs=1M count=1024 status=progress
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
@@ -18,28 +14,48 @@ echo "
 /swapfile		none	swap	defaults	0 0
 " >> /etc/fstab
 
-pacman -S grub efibootmgr dosfstools os-prober mtools
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB --recheck
+
+ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+hwclock --systohc
+sed -i '177s/.//' /etc/locale.gen
+locale-gen
+echo "LANG=en_US.UTF-8" >> /etc/locale.conf
+echo "KEYMAP=us" >> /etc/vconsole.conf
+echo "Dspates81" >> /etc/hostname
+echo "127.0.0.1 localhost" >> /etc/hosts
+echo "::1       localhost" >> /etc/hosts
+echo "127.0.1.1 Dspates81.localdomain Dspates81" >> /etc/hosts
+echo root:password | Pain@4581
+
+# You can add xorg to the installation packages, I usually add it at the DE or WM install script
+# You can remove the tlp package if you are installing on a desktop or vm
+
+pacman -S --needed grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils hplip alsa-utils pulseaudio pulseaudio-bluetooth pavucontrol pulseaudio-jack bash-completion openssh rsync reflector acpi acpi_call tlp virt-manager qemu qemu-arch-extra edk2-ovmf bridge-utils dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font
+
+# cups
+# pacman -S --noconfirm xf86-video-amdgpu
+# pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
+
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
-
-
-echo "--------------------------------------"
-echo "--          Network Setup           --"
-echo "--------------------------------------"
-pacman -S networkmanager network-manager-applet wpa_supplicant wireless_tools mtools netctl dialog dhclient multilib-devel base-devel openssh
 systemctl enable NetworkManager
-systemctl enable ssh
+systemctl enable bluetooth
+#systemctl enable cups.service
+systemctl enable sshd
+systemctl enable avahi-daemon
+#systemctl enable tlp # You can comment this command out if you didn't install tlp, see above
+systemctl enable reflector.timer
+systemctl enable fstrim.timer
+systemctl enable libvirtd
+systemctl enable firewalld
+systemctl enable acpid
+
+useradd -mG justin
+echo justin:password | chpasswd
+usermod -aG libvirt justin
+
+echo "justin ALL=(ALL)NOPASSWORD: ALL" >> /etc/sudoers.d/justin
 
 
-echo "--------------------------------------"
-echo "--      Set Password for Root       --"
-echo "--------------------------------------"
-echo "Enter password for root user: "
-passwd root
-
-umount -R /mnt
-
-echo "--------------------------------------"
-echo "--   SYSTEM READY FOR FIRST BOOT    --"
-echo "--------------------------------------"
+printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
