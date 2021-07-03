@@ -19,12 +19,13 @@ ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
 sed -i '177s/.//' /etc/locale.gen
 locale-gen
-echo "KEYMAP=us" >> /etc/vconsole.conf
+#echo "KEYMAP=us" >> /etc/vconsole.conf
 echo "Dspates81" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 Dspates81.localdomain Dspates81" >> /etc/hosts
-echo root:password | chpasswd
+echo password 
+echo chpasswd
 
 # You can add xorg to the installation packages, I usually add it at the DE or WM install script
 # You can remove the tlp package if you are installing on a desktop or vm
@@ -51,10 +52,11 @@ systemctl enable firewalld
 systemctl enable acpid
 
 useradd -mG justin
-echo justin:password | chpasswd
+echo passwdjustin
+echo chpasswd
 usermod -aG libvirt justin
 
-echo "justin ALL=(ALL)NOPASSWORD: ALL" >> /etc/sudoers.d/justin
+echo "justin %wheel ALL=(ALL)NOPASSWD: ALL" >> /etc/sudoers.d/justin
 
 
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
