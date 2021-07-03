@@ -14,6 +14,14 @@ git clone https://aur.archlinux.org/google-chrome.git
 cd googele-chrome/
 makepkg -ics --noconfirm
 
+git clone https://aur.archlinux.org/paru-bin
+cd paru-bin
+makepkg -ics --noconfirm
+
+sleep 5
+paru -S optimus-manager optimus-manager-qt
+
+
 #git clone https://aur.archlinux.org/pikaur.git
 #cd pikaur/
 #makepkg -si --noconfirm
