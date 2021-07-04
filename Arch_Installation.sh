@@ -31,7 +31,7 @@ echo "-------------------------------------------------"
 
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
-sed -i 's/^# en_US.UTF-8 UTF-8/' /etc/locale.gen
+sed -i '/^# en_US.UTF-8 UTF-8/' /etc/locale.gen
 locale-gen
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
