@@ -9,7 +9,7 @@
 #  Arch Linux Post Install Setup and Config
 #-------------------------------------------------------------------------
 
-if ! source install.conf; then
+if ! source install; then
 	read -p "Please enter hostname:" hostname
 
 	read -p "Please enter username:" username
