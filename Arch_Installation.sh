@@ -33,6 +33,7 @@ ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
 sed -i '/^# en_US.UTF-8 UTF-8/' /etc/locale.gen
 locale-gen
+echo "Dspate81" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 Dspates81.localdomain Dspates81" >> /etc/hosts
