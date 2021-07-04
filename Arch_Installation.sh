@@ -24,8 +24,7 @@ echo "Dspates81" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 Dspates81.localdomain Dspates81" >> /etc/hosts
-echo password 
-echo chpasswd
+
 
 # You can add xorg to the installation packages, I usually add it at the DE or WM install script
 # You can remove the tlp package if you are installing on a desktop or vm
@@ -51,12 +50,6 @@ systemctl enable libvirtd
 systemctl enable firewalld
 systemctl enable acpid
 
-useradd -mG justin
-echo passwdjustin
-echo chpasswd
-usermod -aG libvirt justin
-
-echo "justin %wheel ALL=(ALL)NOPASSWD: ALL" >> /etc/sudoers.d/justin
 
 
-printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
+printf "\e[1;32mDone! .\e[0m"
