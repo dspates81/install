@@ -26,7 +26,6 @@
   printf "hostname="$hostname"\n" >> "install.conf"
   printf "username="$username"\n" >> "install.conf"
   printf "password="$password"\n" >> "install.conf"
-fi
 
 echo "-------------------------------------------------"
 echo "Setting up mirrors for optimal download - US Only"
