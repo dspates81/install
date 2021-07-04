@@ -1,25 +1,21 @@
 #!/bin/bash
 
-sudo timedatectl set-ntp true
-sudo hwclock --systohc
 
-sudo reflector -c America -a 12 --sort rate --save /etc/pacman.d/mirrorlist
-
-sudo firewall-cmd --add-port=1025-65535/tcp --permanent
-sudo firewall-cmd --add-port=1025-65535/udp --permanent
-sudo firewall-cmd --reload
+#sudo firewall-cmd --add-port=1025-65535/tcp --permanent
+#sudo firewall-cmd --add-port=1025-65535/udp --permanent
+#sudo firewall-cmd --reload
 
 
 git clone https://aur.archlinux.org/google-chrome.git
-cd googele-chrome/
-makepkg -ics --noconfirm
+#cd googele-chrome/
+#makepkg -ics --noconfirm
 
 git clone https://aur.archlinux.org/paru-bin
-cd paru-bin
-makepkg -ics --noconfirm
+#cd paru-bin
+#makepkg -ics --noconfirm
 
-sleep 5
-paru -S optimus-manager optimus-manager-qt
+#sleep 5
+#paru -S optimus-manager optimus-manager-qt
 
 
 #git clone https://aur.archlinux.org/pikaur.git
