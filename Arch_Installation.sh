@@ -86,14 +86,8 @@ systemctl enable acpid
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 
-passwd 
-printf "Pain@4581"
-printf "Pain@4581"
 
-useradd -mG wheel justin
-passwd justin
-printf "Pain@4581"
-printf "Pain@4581"
+
 
 
 
