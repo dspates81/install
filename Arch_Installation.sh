@@ -86,14 +86,6 @@ Mkinitcpio -p linux
 
 sleep 5
 
-printf "\e[1;32mRoot User" passwd
-
-sleep 5
-
-printf "\e[1;32mAdd User"
-useradd -mG wheel justin
-passwd justin
-
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 
