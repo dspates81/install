@@ -82,7 +82,7 @@ mv /ArchInst/grub /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
 mv /ArchInst/mkinitcpio.conf /etc/
-Mkinitcpio -p linux
+mkinitcpio -p linux
 
 sleep 5
 
