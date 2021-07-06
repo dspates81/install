@@ -14,7 +14,8 @@ git clone https://aur.archlinux.org/pikaur.git
 
 
 
-sudo pacman -S --noconfirm xorg lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings xfce4-appfinder xfce4-panel xfce4-power-manager xfce4-session xfce4-settings xfconf xfdesktop xfwm4 xfwm4-themes arc-gtk-theme arc-icon-theme vlc xfburn xfce4-artwork xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-mount-plugin xfce4-pulseaudio-plugin xfce4-screensaver xfce4-whiskermenu-plugin xfce4-weather-plugin xfce4-pulseaudio-plugin xfce4-taskmanager krusader hicolor-icon-theme kparts arj cpio kde-cli-tools kdiff3 keditbookmarks kompare konsole ktexteditor lhasa p7zip unace unrar unzip xz zip extra-cmake-modules kdoctools qbittorrent dolphin htop code gnome-disk-utility gedit terminator
+pacman -S --needed acpi acpi_call-lts acpid alsa-utils arc-gtk-theme arc-icon-theme arj avahi bridge-utils code cpio dnsmasq dnsutils dolphin edk2-ovmf extra-cmake-modules gedit gnome-disk-utility gvfs gvfs-smb hicolor-icon-theme htop inetutils kde-cli-tools kdiff3 kdoctools keditbookmarks kompare konsole kparts krusader ktexteditor lhasa lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings nfs-utils nss-mdns ntfs-3g p7zip pavucontrol pulseaudio pulseaudio-bluetooth pulseaudio-jack qbittorrent qemu qemu-arch-extra sof-firmware terminator unace unrar unzip vde2 virt-manager vlc xfburn xfce4-appfinder xfce4-artwork xfce4-battery-plugin xfce4-clipman-plugin xfce4-cpugraph-plugin xfce4-datetime-plugin xfce4-mount-plugin xfce4-panel xfce4-power-manager xfce4-pulseaudio-plugin xfce4-screensaver xfce4-session xfce4-settings xfce4-taskmanager xfce4-weather-plugin xfce4-whiskermenu-plugin xfconf xfdesktop xfwm4 xfwm4-themes xorg xz zip
+
 
 
 
