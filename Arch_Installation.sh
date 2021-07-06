@@ -65,6 +65,7 @@ pacman -S --needed grub efibootmgr networkmanager network-manager-applet dialog 
 # pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
 
 
+systemctl enable NetworkManager
 
 
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
