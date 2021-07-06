@@ -82,7 +82,7 @@ mv /ArchInst/grub /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
 mv /ArchInst/mkinitcpio.conf /etc/
-Mkinitcpio -p linux
+mkinitcpio -p linux
 
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
