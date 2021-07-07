@@ -55,9 +55,9 @@ echo "
 /swapfile		none	swap	defaults	0 0
 " >> /etc/fstab
 
-bootctl --path=/boot install
-cp loader.conf /boot/loader
-cp arch.conf /boot/loader/entries
+#bootctl --path=/boot install
+#cp loader.conf /boot/loader
+#cp arch.conf /boot/loader/entries
 
 cp /ArchInst/mkinitcpio.conf /etc/
 mkinitcpio -p linux
@@ -77,6 +77,11 @@ systemctl enable fstrim.timer
 systemctl enable libvirtd
 systemctl enable firewalld
 systemctl enable acpid
+
+pacman -S --needed grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+cp /ArchInst/grub /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
 
 passwd
 sleep 5
