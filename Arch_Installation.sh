@@ -78,4 +78,10 @@ systemctl enable libvirtd
 systemctl enable firewalld
 systemctl enable acpid
 
+passwd
+sleep 5
+useradd -mG wheel justin
+passwd justin
+
+
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
