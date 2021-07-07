@@ -9,6 +9,7 @@
 #  Arch Linux Post Install Setup and Config
 #-------------------------------------------------------------------------
 pacmn -Sy
+pacman -U http://allanmcrae.com/packages/pacman-6.0.0alpha1-1-x86_64.pkg.tar.zst
 
 echo "-------------------------------------------------"
 echo "Setting up mirrors for optimal download - US Only"
@@ -17,7 +18,7 @@ pacman -S --noconfirm pacman-contrib curl
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 curl -s "https://archlinux.org/mirrorlist/?country=US&protocol=http&protocol=https&ip_version=4" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 pacman -S --needed grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio pulseaudio-bluetooth pavucontrol pulseaudio-jack bash-completion openssh rsync reflector acpi acpi_call tlp virt-manager qemu qemu-arch-extra edk2-ovmf bridge-utils dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font
-pacman -U http://allanmcrae.com/packages/pacman-6.0.0alpha1-1-x86_64.pkg.tar.zst
+
 
 nc=$(grep -c ^processor /proc/cpuinfo)
 echo "You have " $nc" cores."
@@ -59,10 +60,6 @@ echo "
 #cp loader.conf /boot/loader
 #cp arch.conf /boot/loader/entries
 
-cp /ArchInst/mkinitcpio.conf /etc/
-mkinitcpio -p linux
-
-
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 
@@ -83,8 +80,10 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 cp /ArchInst/grub /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
+cp /ArchInst/mkinitcpio.conf /etc/
+mkinitcpio -p linux
+
 passwd
-sleep 5
 useradd -mG wheel justin
 passwd justin
 
