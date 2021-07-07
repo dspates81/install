@@ -16,6 +16,20 @@ echo "-------------------------------------------------"
 pacman -Syy --noconfirm pacman-contrib curl
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 curl -s "https://archlinux.org/mirrorlist/?country=US&protocol=http&protocol=https&ip_version=4" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
+pacman -S --needed networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio pulseaudio-bluetooth pavucontrol pulseaudio-jack bash-completion openssh rsync reflector acpi acpi_call tlp virt-manager qemu qemu-arch-extra edk2-ovmf bridge-utils dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font
+
+systemctl enable NetworkManager
+systemctl enable bluetooth
+#systemctl enable cups.service
+systemctl enable sshd
+systemctl enable avahi-daemon
+systemctl enable tlp # You can comment this command out if you didn't install tlp, see above
+systemctl enable reflector.timer
+systemctl enable fstrim.timer
+systemctl enable libvirtd
+systemctl enable firewalld
+systemctl enable acpid
+
 
 nc=$(grep -c ^processor /proc/cpuinfo)
 echo "You have " $nc" cores."
@@ -53,23 +67,7 @@ echo "
 /swapfile		none	swap	defaults	0 0
 " >> /etc/fstab
 
-pacman -S --needed grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio pulseaudio-bluetooth pavucontrol pulseaudio-jack bash-completion openssh rsync reflector acpi acpi_call tlp virt-manager qemu qemu-arch-extra edk2-ovmf bridge-utils dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld flatpak sof-firmware nss-mdns acpid os-prober ntfs-3g terminus-font
-
-
 # Add sudo no password rights
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
-
-systemctl enable NetworkManager
-systemctl enable bluetooth
-#systemctl enable cups.service
-systemctl enable sshd
-systemctl enable avahi-daemon
-#systemctl enable tlp # You can comment this command out if you didn't install tlp, see above
-systemctl enable reflector.timer
-systemctl enable fstrim.timer
-systemctl enable libvirtd
-systemctl enable firewalld
-systemctl enable acpid
-
 
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
