@@ -8,7 +8,7 @@
 #   /_/ \_\_| \__|_||_|_|  |_\__,_|\__|_\__|
 #  Arch Linux Post Install Setup and Config
 #-------------------------------------------------------------------------
-
+pacmn -Sy
 
 echo "-------------------------------------------------"
 echo "Setting up mirrors for optimal download - US Only"
