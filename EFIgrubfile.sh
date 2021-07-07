@@ -6,8 +6,8 @@
 #grub-mkconfig -o /boot/grub/grub.cfg
 
 bootctl --path=/boot install
-cp loader.conf /boot/loader
-cp arch.conf /boot/loader/entries
+cp /ArchInst/loader.conf /boot/loader
+cp /ArchInst/arch.conf /boot/loader/entries
 
 
 
