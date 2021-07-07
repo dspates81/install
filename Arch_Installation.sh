@@ -9,7 +9,7 @@
 #  Arch Linux Post Install Setup and Config
 #-------------------------------------------------------------------------
 pacmn -Sy
-pacman -U http://allanmcrae.com/packages/pacman-6.0.0alpha1-1-x86_64.pkg.tar.zst
+#pacman -U http://allanmcrae.com/packages/pacman-6.0.0alpha1-1-x86_64.pkg.tar.zst
 
 echo "-------------------------------------------------"
 echo "Setting up mirrors for optimal download - US Only"
