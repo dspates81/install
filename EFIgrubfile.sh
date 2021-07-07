@@ -11,5 +11,5 @@ cp /ArchInst/arch.conf /boot/loader/entries
 
 
 
-mv /ArchInst/mkinitcpio.conf /etc/
-mkinitcpio -p linux
+#mv /ArchInst/mkinitcpio.conf /etc/
+#mkinitcpio -p linux
