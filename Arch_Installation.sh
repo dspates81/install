@@ -59,7 +59,7 @@ passwd
 useradd -mG wheel justin
 passwd justin
 
-pacman -S xdg-user-dirs
+pacman -S xdg-user-dirs xdg-utils
 
 cp xfce4.sh /home/justin/
 
