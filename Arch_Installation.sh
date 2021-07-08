@@ -59,9 +59,10 @@ passwd
 useradd -mG wheel justin
 passwd justin
 
-pacman -S xdg-user-dirs xdg-utils
+pacman -S xdg-user-dirs xdg-utils networkmanager network-manager-applet 
+systemctl enable NetworkManager
 
 cp xfce4.sh /home/justin/
 
 
-printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
+
