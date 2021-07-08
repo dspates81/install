@@ -18,7 +18,7 @@ pacman -S --noconfirm pacman-contrib curl
 mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 curl -s "https://archlinux.org/mirrorlist/?country=US&protocol=http&protocol=https&ip_version=4" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 
-pacman -S --needed  grub efibootmgr networkmanager network-manager-applet wireless_tools dialog mtools dosfstools multilib-devel linux-headers intel-ucode bluez bluez-utils alsa-utils pulseaudio pulseaudio-bluetooth git xdg-utils xdg-user-dirs
+pacman -S --needed grub efibootmgr networkmanager network-manager-applet dialog wpa_supplicant mtools dosfstools base-devel linux-headers avahi xdg-user-dirs xdg-utils gvfs gvfs-smb nfs-utils inetutils dnsutils bluez bluez-utils alsa-utils pulseaudio pulseaudio-bluetooth pavucontrol pulseaudio-jack bash-completion openssh rsync reflector acpi acpi_call tlp edk2-ovmf bridge-utils dnsmasq vde2 openbsd-netcat iptables-nft ipset firewalld sof-firmware nss-mdns acpid os-prober ntfs-3g
 
 nc=$(grep -c ^processor /proc/cpuinfo)
 echo "You have " $nc" cores."
