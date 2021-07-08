@@ -59,6 +59,7 @@ passwd
 sleep 5
 useradd -mG wheel justin
 passwd justin
+
 cp xfce4.sh /home/justin/
 
 
