@@ -56,9 +56,10 @@ echo "
 sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 
 passwd
-sleep 5
 useradd -mG wheel justin
 passwd justin
+
+pacman -S xdg-user-dirs
 
 cp xfce4.sh /home/justin/
 
