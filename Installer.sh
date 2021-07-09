@@ -50,5 +50,6 @@ passwd
 useradd -mG wheel justin
 passwd justin
 
-
+pacman -S networkmanager network-manager-applet 
+systemctl enable NetworkManager
 
