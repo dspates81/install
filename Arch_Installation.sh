@@ -62,7 +62,5 @@ passwd justin
 pacman -S xdg-user-dirs xdg-utils networkmanager network-manager-applet 
 systemctl enable NetworkManager
 
-cp xfce4.sh /home/justin/
-
 
 
