@@ -10,10 +10,8 @@ mkdir Aur_file
 cd Aur_file
 
 git clone https://aur.archlinux.org/google-chrome.git
-cd google-chome/
-makepkg -isc --noconfirm/justin/google-chrome
-cd ..
-cd ..
+#cd google-chome/
+#makepkg -isc --noconfirm/justin/google-chrome
 
 
 #Xfce
@@ -22,3 +20,5 @@ sudo pacman -S --needed exo garcon thunar thunar-volman tumbler xfce4-appfinder 
 
 #Other
 sudo pacman -S --needed  firefox arc-gtk-theme arc-icon-theme code vlc gvfs gvfs-smb edk2-ovmf vde2 nss-mdns virt-manager qemu qemu-arch-extra mkinitcpio-archiso archiso arch-install-scripts bash e2fsprogs libarchive libisoburn squashfs-tools erofs-utils openssl
+
+sudo systemctl enable lightdm.servcie
