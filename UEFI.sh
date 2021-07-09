@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pacmn -Sy
+pacman -Sy
 
 echo "-------------------------------------------------"
 echo "Setting up mirrors for optimal download - US Only"
