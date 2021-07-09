@@ -24,7 +24,7 @@ echo "-------------------------------------------------"
 
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
-cp /ArchInst/locale.gen /etc/locale.gen
+cp /ArchInst/conf/locale.gen /etc/locale.gen
 locale-gen
 echo "Dspate81" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
