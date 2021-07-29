@@ -47,6 +47,7 @@ sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /et
 
 passwd
 useradd -mG wheel justin
+passwd justin
 
 
 pacman -S networkmanager network-manager-applet 
