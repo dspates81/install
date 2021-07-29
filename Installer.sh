@@ -26,12 +26,11 @@ ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
 cp /ArchInst/conf/locale.gen /etc/locale.gen
 locale-gen
-echo "Dspate81" >> /etc/hostname
+
+echo "Desktop" >> /etc/hostname
 echo "127.0.0.1 localhost" >> /etc/hosts
 echo "::1       localhost" >> /etc/hosts
-echo "127.0.1.1 Dspates81.localdomain Dspates81" >> /etc/hosts
-
-
+echo "127.0.1.1 desktop.localdomain Desktop" >> /etc/hosts
 
 
 dd if=/dev/zero of=swapfile bs=1M count=1024 status=progress
