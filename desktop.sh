@@ -58,6 +58,7 @@ passwd justin
 
 pacman -S networkmanager network-manager-applet 
 
+systemctl enable NetworkManager
 
 #./install/uefi.sh
 #./install/bootloader.sh
