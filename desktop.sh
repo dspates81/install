@@ -59,6 +59,6 @@ passwd justin
 pacman -S networkmanager network-manager-applet 
 
 
-./install/uefi.sh
-./install/bootloader.sh
+#./install/uefi.sh
+#./install/bootloader.sh
 
