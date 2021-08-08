@@ -3,4 +3,4 @@ read -p "Please enter username:" username
 	
 
 
-useradd -mG wheel 
+useradd -mG wheel justin
