@@ -1,11 +1,6 @@
-if ! source install.conf; then
-
-	read -p "Please enter username:" username
-
-	read -sp "Please enter password:" password
+read -p "Please enter username:" username
 
 	
-"
-fi
+
 
 useradd -mG wheel 
