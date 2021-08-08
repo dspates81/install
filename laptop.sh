@@ -41,7 +41,7 @@ swapon /swapfile
 echo "
 /swapfile		none	swap	defaults	0 0
 
-//10.170.25.80/Media\040Sever   /home/justin/Media_Sever/               cifs    credentials=/home/justin/.Pserver_creds,file_mode=0777,dir_mode=0777,rw 0   0
+//10.170.25.80/Media_Service   /home/justin/Media_Service/               cifs    credentials=/home/justin/.Pserver_creds,file_mode=0777,dir_mode=0777,rw 0   0
 
 //10.170.25.80/domains   /home/justin/domains/               cifs    credentials=/home/justin/.Pserver_creds,file_mode=0777,dir_mode=0777,rw       0       0
 
