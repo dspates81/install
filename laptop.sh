@@ -41,11 +41,11 @@ swapon /swapfile
 echo "
 /swapfile		none	swap	defaults	0 0
 
-//10.170.25.80/Media_Service   /home/justin/Media_Service/               cifs    credentials=/home/justin/.Pserver_creds,file_mode=0777,dir_mode=0777,rw 0   0
+//10.170.25.80/Media_Service   /home/justin/Media_Service/               cifs    credentials=/home/justin/.Pserver_creds,file_mode=0777,dir_mode=0777,defualt,noauto 0   0
 
-//10.170.25.80/domains   /home/justin/domains/               cifs    credentials=/home/justin/.Pserver_creds,file_mode=0777,dir_mode=0777,rw       0       0
+//10.170.25.80/domains   /home/justin/domains/               cifs    credentials=/home/justin/.Pserver_creds,file_mode=0777,dir_mode=0777,defualt,noauto       0       0
 
-//10.170.25.80/storage   /home/justin/storage/               cifs    credentials=/home/justin/.Pserver_creds,file_mode=0777,dir_mode=0777,rw       0       0
+//10.170.25.80/storage   /home/justin/storage/               cifs    credentials=/home/justin/.Pserver_creds,file_mode=0777,dir_mode=0777,defualt,noauto       0       0
 " >> /etc/fstab
 
 # Add sudo no password rights
