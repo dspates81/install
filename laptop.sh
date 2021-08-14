@@ -55,3 +55,6 @@ sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /et
 
 
 
+./install/laptop.sh
+./install/packages.sh
+./install/user.sh
