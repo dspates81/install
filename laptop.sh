@@ -55,6 +55,6 @@ sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 
 
 
-./install/laptop.sh
+./install/bootloader.sh
 ./install/packages.sh
 ./install/user.sh
