@@ -9,6 +9,6 @@ cp /install/conf/grub /etc/default/grub
 cp /install/conf/mkinitcpio.conf /etc/
 mkinitcpio -p linux
 
-./install/laptop.sh
-./install/packages.sh
-./install/user.sh
+#./install/laptop.sh
+#./install/packages.sh
+#./install/user.sh
