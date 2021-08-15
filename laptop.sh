@@ -18,6 +18,10 @@ sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j$nc"/g' /etc/makepkg.conf
 echo "Changing the compression settings for "$nc" cores."
 sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T $nc -z -)/g' /etc/makepkg.conf
 
+timedatectl set-ntp true
+timedatectl status
+sleep 3
+
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
 cp /install/conf/locale.gen /etc/locale.gen
