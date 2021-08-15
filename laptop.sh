@@ -18,14 +18,10 @@ sudo sed -i 's/#MAKEFLAGS="-j2"/MAKEFLAGS="-j$nc"/g' /etc/makepkg.conf
 echo "Changing the compression settings for "$nc" cores."
 sudo sed -i 's/COMPRESSXZ=(xz -c -z -)/COMPRESSXZ=(xz -c -T $nc -z -)/g' /etc/makepkg.conf
 
-echo "-------------------------------------------------"
-echo "       Setup Language to US and set locale       "
-echo "-------------------------------------------------"
-
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 hwclock --systohc
-timedatectl set-timezone America/New_York
 cp /install/conf/locale.gen /etc/locale.gen
+timedatectl set-timezone America/New_York
 locale-gen
 
 echo "Dspates" >> /etc/hostname
@@ -34,7 +30,7 @@ echo "::1       localhost" >> /etc/hosts
 echo "127.0.1.1 Dspates.localdomain Dspates" >> /etc/hosts
 
 
-dd if=/dev/zero of=swapfile bs=1M count=1024 status=progress
+dd if=/dev/zero of=swapfile bs=1M count=2048 status=progress
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
@@ -50,10 +46,7 @@ echo "
 " >> /etc/fstab
 
 # Add sudo no password rights
-sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
-
-
-
+sed -i 's/^# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/' /etc/sudoers
 
 
 ./install/packages.sh
