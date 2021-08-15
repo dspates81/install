@@ -12,3 +12,5 @@ cp /install/conf/grub /etc/default/grub
 cp /install/conf/mkinitcpio.conf /etc/
 
 mkinitcpio -p linux
+
+useradd -mG wheel 
