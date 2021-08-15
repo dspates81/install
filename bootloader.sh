@@ -8,3 +8,12 @@ cp /install/conf/grub /etc/default/grub
 
 cp /install/conf/mkinitcpio.conf /etc/
 mkinitcpio -p linux
+
+
+exit 
+sleep 5
+
+umount -l /mnt
+sleep 5
+
+reboot
